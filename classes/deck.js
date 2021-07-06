@@ -1,7 +1,14 @@
 const Card = require ("./card.js")
+/* 
+The deck class requires the Card class, and has it's own set of methods which can be invoked to populate the deck, shuffle the deck, and draw a card as well as methods for getting the number of cards yet to be flipped, and showing all the remaining cards in the deck. 
 
+It includes a constructor with a single argument, a boolean true or false, which will determine whether or not jokers are included in the deck when it is generated. 
+
+If, when a card is drawn there are no cards "remaining" in the deck (array length = 0), the dealCard method returns a new Card object with a numerical value of 0, a numberString value of "No more cards!" and a suit of "No more cards!"
+*/
 class Deck {
-  constructor(){
+  constructor(includeJokers){
+    this.jokers = includeJokers;
     this.cards = new Array();
     this.populateDeck();
     this.unflippedCards = this.cards.length;
@@ -34,11 +41,16 @@ class Deck {
       else if(number == 1) numberString = "Ace";
       else if(number == 12) numberString = "Queen";
       else if(number == 11) numberString = "Jack";
-
       else numberString = number.toString();
 
       this.cards.push(new Card(number, numberString, suit));
     }
+    if(this.jokers === true){
+      console.log("jokers detected")
+      this.cards.push(new Card(0,"Joker", "Red"));
+      this.cards.push(new Card(0,"Joker", "Black"));
+    }
+    this.shuffle();
     return;
   }
 
@@ -58,25 +70,10 @@ class Deck {
       this.unflippedCards--;
       return topCard;
     }
-    else return "no more cards";
+    else return new Card(0, "No more cards!", "No more cards!");
   }
 }
 
-let deck1 = new Deck();
-// console.log(deck1.cardsRemaining());
-deck1.shuffle();
-// console.table(deck1.showCards());
-for(let i = 0; i < 53; i++){
-  let testVal = deck1.dealCard();
-  
-  // console.log(typeof(testVal))
-  if(typeof(testVal) != "string") {
-    console.log(testVal.read());
-  } else console.log(testVal);
-}
-
-console.log(deck1.cardsRemaining());
-
-module.exports = {Deck};
+module.exports = (Deck);
 return;
 
