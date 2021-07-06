@@ -1,0 +1,10 @@
+{
+  "name": "randomgen",
+  "version": "1.0.0",
+  "description": "A simple generator that lets you draw one card at a time from a standard, shuffled, 52 card deck. ",
+  "main": "index.js",
+  "repository": "git@github.com:medricr/randomgen.git",
+  "author": "medricr <medricr@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
